@@ -1,7 +1,7 @@
 "use strict";
 
 const LockedArray = function(from) {
-  const key = Symbol();
+  const key = Symbol("key");
   let locked = false;
 
   let array;
@@ -13,18 +13,17 @@ const LockedArray = function(from) {
 
   Object.defineProperty(this, "key", {
     enumerable:true,
-    get:()=>{
+    get:() => {
       if(!locked) {
         locked = true;
         return key;
       }
-      else return;
     }
   });
 
   Object.defineProperty(this, "lock", {
     enumerable:true,
-    value:function lock(){locked = true},
+    value:function lock() { locked = true },
     writable:false
   });
 
@@ -39,7 +38,7 @@ const LockedArray = function(from) {
 
   Object.defineProperty(this, "value", {
     enumerable:true,
-    get:()=>{return Array.from(array)}
+    get:()=> { return Array.from(array) }
   });
 
   Object.defineProperty(this, "add", {
@@ -55,10 +54,8 @@ const LockedArray = function(from) {
     enumerable:true,
     value:function remove(element) {
       let index = array.indexOf(element);
-      if(index < 0) {
+      if(index < 0)
         throw new Error("Passed value 'element' does not exist in the array.");
-        return;
-      }
       if(!locked) array.splice(index, 1);
       else throw new Error("Array is locked.");
     },
@@ -67,7 +64,7 @@ const LockedArray = function(from) {
 
   Object.defineProperty(this, "includes", {
     enumerable:true,
-    value:function includes(element) {return array.indexOf(element) >= 0},
+    value:function includes(element) { return array.indexOf(element) >= 0 },
     writable:false
   });
 
@@ -100,9 +97,13 @@ const LockedArray = function(from) {
   });
 }
 
-LockedArray.prototype.valueOf = function valueOf()
-{return this.value}
-LockedArray.prototype.toString = function toString()
-{return "[object LockedArray]"}
+Object.defineProperty(LockedArray.prototype, "valueOf", {
+  value: function valueOf() { return this.value },
+  configurable: true
+});
+Object.defineProperty(LockedArray.prototype, "toString", {
+  value: function toString() { return "[object LockedArray]" },
+  configurable: true
+});
 
 module.exports = LockedArray;

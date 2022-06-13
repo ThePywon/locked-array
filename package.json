@@ -2,7 +2,7 @@
   "name": "@protagonists/locked-array",
   "version": "1.0.0",
   "description": "Ever wanted readonly arrays?",
-  "main": "index.js",
+  "main": "Locked Array",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
