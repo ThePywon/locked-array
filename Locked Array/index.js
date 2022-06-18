@@ -21,6 +21,11 @@ const LockedArray = function(from) {
     }
   });
 
+  Object.defineProperty(this, "locked", {
+    enumerable: true,
+    get: () => { return locked }
+  });
+
   Object.defineProperty(this, "lock", {
     enumerable:true,
     value:function lock() { locked = true },

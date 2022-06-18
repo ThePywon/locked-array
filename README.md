@@ -65,14 +65,21 @@ Elements within it can still be modified and accessed as normal
 ### Code:
 
 ```js
+// Imports
 const LockedArray = require("@protagonists/locked-array");
-const fruits = new LockedArray(["Apple", "Orange"]);
+// Create LockedArray instance
+const fruits = new LockedArray(["apple", "orange"]);
 
-fruits.add("Tomato");
+// Add "tomato" in the array
+fruits.add("tomato");
+// Lock the array
 fruits.lock();
 
+// Log the array's value
 console.log(fruits.value);
-fruits.value.push("Banana");
+// try to add element to the direct value
+fruits.value.push("banana");
+// Log the array's value
 console.log(fruits.value);
 ```
 
@@ -81,8 +88,8 @@ console.log(fruits.value);
 ### Output:
 
 ```
-[ 'Apple', 'Orange', 'Tomato' ]
-[ 'Apple', 'Orange', 'Tomato' ]
+[ 'apple', 'orange', 'tomato' ]
+[ 'apple', 'orange', 'tomato' ]
 ```
 
 <br/><br/><br/><br/><br/>
